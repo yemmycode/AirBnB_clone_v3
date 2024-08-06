@@ -4,8 +4,17 @@
 import importlib
 import sys
 
+if len(sys.argv) != 2:
+    print("Usage: ./test.py <module_name>")
+    sys.exit(1)
+
 module_name = sys.argv[1]
-module = importlib.import_module(module_name)
+
+try:
+    module = importlib.import_module(module_name)
+except ModuleNotFoundError:
+    print(f"Error: No module named '{module_name}'")
+    sys.exit(1)
 
 if module.__doc__:
     print("OK", end="")
